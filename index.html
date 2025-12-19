@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Updated viewport meta tag for better mobile support -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:opsz,wght@17..18,400..700&display=swap" rel="stylesheet">
+  <title>SHIFT SCHEDULE 2026</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="month-control">
+        <button id="prevMonth" class="icon-btn" type="button" aria-label="Previous month">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-svg"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <span id="monthLabel" class="month-label"></span>
+        <button id="nextMonth" class="icon-btn" type="button" aria-label="Next month">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-svg"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      <div class="download">
+        <button id="downloadBtn" class="download-btn" type="button">Download Schedule as Image</button>
+      </div>
+    </div>
+
+    <div class="calendar">
+      <div class="calendar-grid-container">
+        <div class="calendar-grid" id="calendarGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="downloadModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Download Schedule</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>Select Team</h3>
+          <div id="personFilters" class="modal-filters"></div>
+        </div>
+        <div class="modal-section">
+          <h3>Select Month</h3>
+          <div id="monthFilters" class="modal-filters"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="cancelDownload" class="modal-btn modal-btn-cancel">Cancel</button>
+        <button id="confirmDownload" class="modal-btn modal-btn-confirm">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preview modal: show generated image(s) before actual download -->
+  <div id="previewModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header preview-header">
+        <h2>Schedule Preview</h2>
+        <!-- instruction now on second line inside header -->
+        <div class="preview-instruction">
+          Click any image to download the schedule
+        </div>
+      </div>
+
+      <div class="modal-body preview-modal-body">
+        <div id="previewList" class="preview-list"></div>
+      </div>
+      <div class="modal-footer preview-modal-footer">
+         <button id="backPreview" class="modal-btn modal-btn-cancel" type="button">Back</button>
+         <button id="closePreview" class="modal-btn modal-btn-cancel" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
