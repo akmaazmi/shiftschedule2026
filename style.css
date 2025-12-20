@@ -496,7 +496,7 @@ body {
 
   .header {
     flex-direction: column;
-    gap: 150px;
+    gap: 10px;
   }
 
   .month-control {
