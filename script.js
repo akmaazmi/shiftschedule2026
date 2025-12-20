@@ -891,7 +891,7 @@ const teams = ['SITI', 'IRA', 'EKIN', 'BALQIS'];
       if (isIOSDevice()) {
         const iosInstruction = document.querySelector('.preview-instruction');
         if (iosInstruction) {
-          iosInstruction.textContent = 'Tap any image to share and save to Photos';
+          iosInstruction.textContent = 'Tap any image to download the schedule';
         }
       }
       
@@ -905,9 +905,9 @@ const teams = ['SITI', 'IRA', 'EKIN', 'BALQIS'];
         
         // Update title based on device
         if (isIOSDevice()) {
-          img.title = `Tap to share ${getMonthName(it.monthIndex)} 2026`;
+          img.title = `${getMonthName(it.monthIndex)} 2026`;
         } else {
-          img.title = `Click to download ${getMonthName(it.monthIndex)} 2026`;
+          img.title = `${getMonthName(it.monthIndex)} 2026`;
         }
 
         // click any image to download/share that image
