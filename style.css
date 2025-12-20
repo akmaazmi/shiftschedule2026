@@ -490,9 +490,7 @@ body {
     --scale: 0.7;
   }
 
-  body {
-    padding-bottom: max(env(safe-area-inset-bottom), 16px);
-  }
+
 
   .container {
     height: 100dvh;
