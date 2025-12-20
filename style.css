@@ -492,12 +492,11 @@ body {
 
   .container {
     height: 100dvh;
-    
   }
 
   .header {
     flex-direction: column;
-    gap: calc(10px * var(--scale));
+    gap: 50px;
   }
 
   .month-control {
