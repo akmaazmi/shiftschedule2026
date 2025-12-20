@@ -40,6 +40,17 @@ body {
   border-radius: 16px;
 }
 
+/* version label (small text at top of header) */
+.header .version {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  transform: translate(-50%);
+}
+
 .filters {
   align-items: center;
   display: flex;
@@ -479,7 +490,9 @@ body {
     --scale: 0.7;
   }
 
-
+  body {
+    padding-bottom: max(env(safe-area-inset-bottom), 16px);
+  }
 
   .container {
     height: 100dvh;
