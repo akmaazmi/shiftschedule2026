@@ -49,6 +49,7 @@ body {
   font-weight: 600;
   color: #6b7280;
   transform: translate(-50%);
+  visibility: hidden;
 }
 
 .filters {
@@ -520,9 +521,7 @@ body {
   }
 
   .modal-content {
-    width: 95%;
-    max-width: 95%;
-    max-height: 90vh;
+    max-width: 90dvw;
     max-height: 90dvh;
   }
 

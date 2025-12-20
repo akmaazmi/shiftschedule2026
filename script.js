@@ -749,7 +749,7 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
         .export-empty-day-wrapper {
           display: flex;
           flex-direction: column;
-          visibility: shown;
+          visibility: hidden;
           min-width: 0;
         }
         
