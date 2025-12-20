@@ -490,11 +490,9 @@ body {
     --scale: 0.7;
   }
 
-
-
   .container {
     height: 100dvh;
-    padding-bottom: calc(24px * var(--scale) + env(safe-area-inset-bottom));
+    
   }
 
   .header {
