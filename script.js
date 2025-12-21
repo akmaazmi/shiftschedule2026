@@ -734,9 +734,9 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
           flex-shrink: 0;
         }
         
-        .export-shift-pill.morning { background: #166534; }
-        .export-shift-pill.evening { background: #b91c1c; }
-        .export-shift-pill.night { background: #6b7280; }
+        .export-shift-pill.morning { background: var(--morning-color); }
+        .export-shift-pill.evening { background: var(--evening-color); }
+        .export-shift-pill.night { background: var(--night-color); }
         .export-shift-pill.rest { background: antiquewhite; color: black; }
         .export-shift-pill.off { background: antiquewhite; color: black; }
         
