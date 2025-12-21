@@ -49,7 +49,7 @@ body {
   font-weight: 600;
   color: #6b7280;
   transform: translate(-50%);
-  visibility: hidden;
+  display: none;
 }
 
 .filters {
@@ -413,6 +413,7 @@ body {
   color: black;
   background: var(--background-default);
   border: var(--border-default);
+  display: none;
 }
 
 .modal-btn-inspect:hover {
