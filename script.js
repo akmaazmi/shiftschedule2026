@@ -355,20 +355,17 @@ downloadBtn.addEventListener('click', () => {
       allPersonBtn.classList.remove('active');
       personFilters.querySelectorAll('.modal-filter-pill:not([data-person="ALL"])').forEach(pill => {
         pill.classList.remove('active');
-      }
-      );
+      });
     } else {
       // Select all
       teams.forEach(t => downloadSelection.persons.add(t));
       allPersonBtn.classList.add('active');
       personFilters.querySelectorAll('.modal-filter-pill:not([data-person="ALL"])').forEach(pill => {
         pill.classList.add('active');
-      }
-      );
+      });
     }
     updateConfirmState();
-  }
-  );
+  });
 
   personFilters.appendChild(allPersonBtn);
 
@@ -396,12 +393,10 @@ downloadBtn.addEventListener('click', () => {
       }
 
       updateConfirmState();
-    }
-    );
+    });
 
     personFilters.appendChild(pill);
-  }
-  );
+  });
 
   // populate month filters (Jan - Dec 2026)
   monthFilters.innerHTML = '';
@@ -422,20 +417,17 @@ downloadBtn.addEventListener('click', () => {
       allMonthBtn.classList.remove('active');
       monthFilters.querySelectorAll('.modal-filter-pill:not([data-month="ALL"])').forEach(pill => {
         pill.classList.remove('active');
-      }
-      );
+      });
     } else {
       // Select all
       months.forEach((_, index) => downloadSelection.months.add(index));
       allMonthBtn.classList.add('active');
       monthFilters.querySelectorAll('.modal-filter-pill:not([data-month="ALL"])').forEach(pill => {
         pill.classList.add('active');
-      }
-      );
+      });
     }
     updateConfirmState();
-  }
-  );
+  });
 
   monthFilters.appendChild(allMonthBtn);
 
@@ -463,12 +455,10 @@ downloadBtn.addEventListener('click', () => {
       }
 
       updateConfirmState();
-    }
-    );
+    });
 
     monthFilters.appendChild(pill);
-  }
-  );
+  });
 
   modal.classList.add('show');
 }
@@ -598,7 +588,7 @@ confirmDownload.addEventListener('click', async () => {
 // generateCalendarImage now accepts optional maxRows to force uniform row height
 async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
   // Scaling factor for saved images
-  const SCALE = 3.6;
+  const SCALE = 3.8;
 
   // A4 Landscape dimensions at 300 DPI
   const A4_WIDTH = 3508;
@@ -608,12 +598,21 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
   const styleEl = document.createElement('style');
   styleEl.id = 'export-styles';
   styleEl.textContent = `
+        :root {
+          --morning-color: #0369a1;
+          --evening-color: #b91c1c;
+          --night-color: #5f6f82;
+          --off-color: antiquewhite;
+          --rest-color: antiquewhite;
+          --border-style: ${2 * SCALE}px solid var(--night-color);
+        }
+
         .export-container {
           position: absolute;
           left: -9999px;
           width: ${A4_WIDTH}px;
           height: ${A4_HEIGHT}px;
-          background: whitesmoke;
+          background: white;
           box-sizing: border-box;
           font-family: "Google Sans", sans-serif;
           overflow: hidden;
@@ -623,16 +622,12 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
           height: 100%;
           display: flex;
           flex-direction: column;
-          padding: ${8 * SCALE}px;
-          background: #fbfbfb;
-          border: ${2 * SCALE}px solid lightslategray;
-          border-radius: ${8 * SCALE}px;
+          background: white;
           box-sizing: border-box;
         }
         
         .export-title-block {
           text-align: center;
-          margin-bottom: ${8 * SCALE}px;
           flex-shrink: 0;
         }
         
@@ -641,7 +636,8 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
           font-size: ${16 * SCALE}px;
           font-weight: 600;
           font-family: "Google Sans", sans-serif;
-          color: #111827;
+          color: black;
+          padding-bottom: ${6 * SCALE}px;
         }
         
         .export-grid-container {
@@ -655,7 +651,7 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
           display: grid;
           grid-template-columns: repeat(7, 1fr);
           grid-template-rows: auto repeat(6, 1fr);
-          gap: ${8 * SCALE}px;
+          gap: ${6 * SCALE}px;
           height: 100%;
           width: 100%;
           box-sizing: border-box;
@@ -665,11 +661,10 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
           font-size: ${13 * SCALE}px;
           font-weight: 600;
           text-align: center;
-          background: #fbfbfb;
-          border-bottom: ${2 * SCALE}px solid lightslategray;
+          background: transparent;
+          border-bottom: var(--border-style);
           font-family: "Google Sans", sans-serif;
-          color: #111827;
-          padding-bottom: ${4 * SCALE}px;
+          color: black;
           box-sizing: border-box;
         }
         
@@ -684,30 +679,30 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
         .export-date {
           font-size: ${12 * SCALE}px;
           font-weight: 600;
-          padding-bottom: ${4 * SCALE}px;
           text-align: center;
-          color: #111827;
+          color: black;
           font-family: "Google Sans", sans-serif;
           flex-shrink: 0;
         }
         
         .export-day {
           flex: 1;
-          background: #fbfbfb;
-          border: ${2 * SCALE}px solid lightslategray;
-          border-radius: ${8 * SCALE}px;
+          background: white;
+          border: var(--border-style);
+          border-radius: ${6 * SCALE}px;
           box-sizing: border-box;
           overflow: hidden;
           display: flex;
           flex-direction: column;
           min-width: 0;
           min-height: 0;
+          padding: ${6 * SCALE}px ${6 * SCALE}px 0 ${6 * SCALE}px;
         }
         
         .export-person {
           align-items: center;
           display: flex;
-          padding: ${4 * SCALE}px;
+          padding-bottom: ${6 * SCALE}px;
           gap: ${6 * SCALE}px;
           min-height: 0;
           min-width: 0;
@@ -716,35 +711,30 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
         .export-name-pill {
           font-size: ${12 * SCALE}px;
           font-weight: 600;
-          color: #111827;
+          color: black;
           font-family: "Google Sans", sans-serif;
           white-space: nowrap;
           overflow: hidden;
-          text-overflow: ellipsis;
         }
         
         .export-shift-pill {
           font-size: ${11 * SCALE}px;
-          padding: ${0 * SCALE}px ${0 * SCALE}px;
           white-space: nowrap;
-          color: #fbfbfb;
-          border-radius: ${0 * SCALE}px;
           font-family: "Google Sans", sans-serif;
           font-weight: 600;
           flex-shrink: 0;
         }
         
-        .export-shift-pill.morning { background: var(--morning-color); }
-        .export-shift-pill.evening { background: var(--evening-color); }
-        .export-shift-pill.night { background: var(--night-color); }
-        .export-shift-pill.rest { background: antiquewhite; color: black; }
-        .export-shift-pill.off { background: antiquewhite; color: black; }
+        .export-shift-pill.morning { background: var(--morning-color); color: white; }
+        .export-shift-pill.evening { background: var(--evening-color); color: white; }
+        .export-shift-pill.night { background: var(--night-color); color: white; }
+        .export-shift-pill.rest { background: var(--rest-color); color: black; }
+        .export-shift-pill.off { background: var(--off-color); color: black; }
         
         .export-work-cycle {
           font-size: ${11 * SCALE}px;
-          color: #6b7280;
+          color: black;
           font-family: "Google Sans", sans-serif;
-          font-weight: 400;
           white-space: nowrap;
           flex-shrink: 0;
         }
@@ -900,7 +890,7 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
   const canvas = await html2canvas(tempContainer, {
     scale: 2.5,
     useCORS: true,
-    backgroundColor: 'whitesmoke',
+    backgroundColor: 'white',
     width: A4_WIDTH,
     height: A4_HEIGHT,
     windowWidth: A4_WIDTH,
@@ -1101,4 +1091,302 @@ backPreviewBtn.addEventListener('click', () => {
 function getMonthName(monthIndex) {
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   return months[monthIndex];
+}
+
+// Add inspect button handler after the downloadBtn event listener
+const inspectBtn = document.getElementById('inspectBtn');
+
+inspectBtn.addEventListener('click', () => {
+  // Check if any person and month is selected
+  if (downloadSelection.persons.size === 0 || downloadSelection.months.size === 0) {
+    return;
+  }
+
+  // Get selected persons and months
+  const selectedPersons = downloadSelection.persons;
+  const selectedMonths = Array.from(downloadSelection.months).sort((a, b) => a - b);
+
+  // Use first selected month
+  const monthIndex = selectedMonths[0];
+
+  // Open new window with export preview
+  openInspectWindow(monthIndex, selectedPersons);
+});
+
+function openInspectWindow(monthIndex, selectedPersons) {
+  const SCALE = 3.6;
+  const A4_WIDTH = 3508;
+  const A4_HEIGHT = 2480;
+
+  // Normalize selected persons
+  let personsArr;
+  if (!selectedPersons || selectedPersons.size === 0) {
+    personsArr = Array.from(teams);
+  } else {
+    personsArr = Array.from(selectedPersons).sort((a, b) => teams.indexOf(a) - teams.indexOf(b));
+  }
+
+  const year = 2026;
+  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const firstDay = new Date(year, monthIndex, 1).getDay();
+  const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
+  
+  const totalCells = 42;
+  const emptyCellsAtStart = firstDay;
+  const emptyCellsAtEnd = totalCells - emptyCellsAtStart - daysInMonth;
+
+  // Generate HTML for calendar
+  let calendarHTML = '';
+  
+  // Day names
+  dayNames.forEach(d => {
+    calendarHTML += `<div class="export-day-name">${d}</div>`;
+  });
+
+  // Empty cells at start
+  for (let i = 0; i < emptyCellsAtStart; i++) {
+    calendarHTML += `
+      <div class="export-empty-day-wrapper">
+        <div class="export-empty-day" aria-hidden="true"></div>
+      </div>
+    `;
+  }
+
+  // Calendar days
+  for (let d = 1; d <= daysInMonth; d++) {
+    let personsHTML = '';
+    
+    personsArr.forEach(name => {
+      const assignDate = new Date(year, monthIndex, d);
+      const assign = computeAssignment(name, assignDate);
+      
+      const workCycleHTML = (assign.cycleIndex >= 1 && assign.cycleIndex <= 6) 
+        ? `<span class="export-work-cycle">D${assign.cycleIndex}</span>`
+        : '';
+      
+      personsHTML += `
+        <div class="export-person">
+          <span class="export-name-pill">${name}</span>
+          <span class="export-shift-pill ${assign.shift}">${SHIFT_LABELS[assign.shift] ?? assign.shift}</span>
+          ${workCycleHTML}
+        </div>
+      `;
+    });
+
+    calendarHTML += `
+      <div class="export-day-wrapper">
+        <div class="export-date">${d}</div>
+        <div class="export-day">
+          ${personsHTML}
+        </div>
+      </div>
+    `;
+  }
+
+  // Empty cells at end
+  for (let i = 0; i < emptyCellsAtEnd; i++) {
+    calendarHTML += `
+      <div class="export-empty-day-wrapper">
+        <div class="export-empty-day" aria-hidden="true"></div>
+      </div>
+    `;
+  }
+
+  const html = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Google+Sans:opsz,wght@17..18,400..700&display=swap" rel="stylesheet">
+      <title>Inspect - ${getMonthName(monthIndex)} 2026</title>
+      <style>
+        :root {
+          --morning-color: #0369a1;
+          --evening-color: #b91c1c;
+          --night-color: #5f6f82;
+          --off-color: antiquewhite;
+          --rest-color: antiquewhite;
+          --border-style: ${2 * SCALE}px solid var(--night-color);
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          margin: 0;
+          padding: 20px;
+          background: white;
+          font-family: "Google Sans", sans-serif;
+        }
+
+        .export-container {
+          width: ${A4_WIDTH}px;
+          height: ${A4_HEIGHT}px;
+          background: white;
+          margin: 0 auto;
+          box-sizing: border-box;
+          overflow: hidden;
+        }
+        
+        .export-calendar {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          background: white;
+          box-sizing: border-box;
+        }
+        
+        .export-title-block {
+          text-align: center;
+          flex-shrink: 0;
+        }
+        
+        .export-title {
+          margin: 0;
+          font-size: ${16 * SCALE}px;
+          font-weight: 600;
+          font-family: "Google Sans", sans-serif;
+          color: black;
+          padding-bottom: ${6 * SCALE}px;
+        }
+        
+        .export-grid-container {
+          flex: 1;
+          overflow: hidden;
+          min-height: 0;
+          box-sizing: border-box;
+        }
+        
+        .export-grid {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          grid-template-rows: auto repeat(6, 1fr);
+          gap: ${6 * SCALE}px;
+          height: 100%;
+          width: 100%;
+          box-sizing: border-box;
+        }
+        
+        .export-day-name {
+          font-size: ${13 * SCALE}px;
+          font-weight: 600;
+          text-align: center;
+          background: transparent;
+          border-bottom: var(--border-style);
+          font-family: "Google Sans", sans-serif;
+          color: black;
+          box-sizing: border-box;
+        }
+        
+        .export-day-wrapper {
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
+          min-height: 0;
+          box-sizing: border-box;
+        }
+        
+        .export-date {
+          font-size: ${12 * SCALE}px;
+          font-weight: 600;
+          text-align: center;
+          color: black;
+          font-family: "Google Sans", sans-serif;
+          flex-shrink: 0;
+        }
+        
+        .export-day {
+          flex: 1;
+          background: white;
+          border: var(--border-style);
+          border-radius: ${6 * SCALE}px;
+          box-sizing: border-box;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
+          min-height: 0;
+          padding: ${6 * SCALE}px ${6 * SCALE}px 0 ${6 * SCALE}px;
+        }
+        
+        .export-person {
+          align-items: center;
+          display: flex;
+          padding-bottom: ${6 * SCALE}px;
+          gap: ${6 * SCALE}px;
+          min-height: 0;
+          min-width: 0;
+        }
+        
+        .export-name-pill {
+          font-size: ${12 * SCALE}px;
+          font-weight: 600;
+          color: black;
+          font-family: "Google Sans", sans-serif;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+        
+        .export-shift-pill {
+          font-size: ${11 * SCALE}px;
+          white-space: nowrap;
+          font-family: "Google Sans", sans-serif;
+          font-weight: 600;
+          flex-shrink: 0;
+        }
+        
+        .export-shift-pill.morning { background: var(--morning-color); color: white; }
+        .export-shift-pill.evening { background: var(--evening-color); color: white; }
+        .export-shift-pill.night { background: var(--night-color); color: white; }
+        .export-shift-pill.rest { background: var(--rest-color); color: black; }
+        .export-shift-pill.off { background: var(--off-color); color: black; }
+        
+        .export-work-cycle {
+          font-size: ${11 * SCALE}px;
+          color: black;
+          font-family: "Google Sans", sans-serif;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+        
+        .export-empty-day-wrapper {
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
+          min-height: 0;
+          visibility: hidden;
+        }
+        
+        .export-empty-day {
+          flex: 1;
+          min-height: 0;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="export-container">
+        <div class="export-calendar">
+          <div class="export-title-block">
+            <h1 class="export-title">${getMonthName(monthIndex)} 2026</h1>
+          </div>
+          <div class="export-grid-container">
+            <div class="export-grid">
+              ${calendarHTML}
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  const newWindow = window.open('', '_blank');
+  newWindow.document.write(html);
+  newWindow.document.close();
 }
