@@ -301,7 +301,7 @@ document.getElementById('nextMonth').onclick = () => {
   }
   renderCalendar();
 }
-  ;
+ ;
 
 // init
 createFilterPills();
@@ -654,6 +654,7 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
         .export-grid {
           display: grid;
           grid-template-columns: repeat(7, 1fr);
+          grid-template-rows: auto repeat(6, 1fr);
           gap: ${8 * SCALE}px;
           height: 100%;
           width: 100%;
@@ -668,7 +669,6 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
           border-bottom: ${2 * SCALE}px solid lightslategray;
           font-family: "Google Sans", sans-serif;
           color: #111827;
-          height: fit-content;
           padding-bottom: ${4 * SCALE}px;
           box-sizing: border-box;
         }
@@ -677,6 +677,7 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
           display: flex;
           flex-direction: column;
           min-width: 0;
+          min-height: 0;
           box-sizing: border-box;
         }
         
@@ -687,6 +688,7 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
           text-align: center;
           color: #111827;
           font-family: "Google Sans", sans-serif;
+          flex-shrink: 0;
         }
         
         .export-day {
@@ -699,6 +701,7 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
           display: flex;
           flex-direction: column;
           min-width: 0;
+          min-height: 0;
         }
         
         .export-person {
@@ -749,16 +752,14 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
         .export-empty-day-wrapper {
           display: flex;
           flex-direction: column;
-          visibility: hidden;
           min-width: 0;
+          min-height: 0;
+          visibility: hidden;
         }
         
         .export-empty-day {
           flex: 1;
-          background: #fbfbfb;
-          border: ${2 * SCALE}px solid lightslategray;
-          border-radius: ${8 * SCALE}px;
-          box-sizing: border-box;
+          min-height: 0;
         }
       `;
   document.head.appendChild(styleEl);
@@ -802,24 +803,15 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
     dn.className = 'export-day-name';
     dn.textContent = d;
     tempGrid.appendChild(dn);
-  }
-  );
+  });
 
   const firstDay = new Date(year, monthIndex, 1).getDay();
   const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
 
-  // Calculate grid rows (always 6 rows for calendar body)
-  const effectiveRows = maxRows || 6;
-
-  // Set grid properties
-  tempGrid.style.gridTemplateRows = `auto repeat(${effectiveRows}, minmax(0, 1fr))`;
-  tempGrid.style.gridAutoFlow = 'row';
-  tempGrid.style.alignContent = 'start';
-
-  // Add 42 cells (7 columns x 6 rows) including empty days
-  const totalBodyCells = effectiveRows * 7;
+  // Always 42 cells (7 columns x 6 rows)
+  const totalCells = 42;
   const emptyCellsAtStart = firstDay;
-  const emptyCellsAtEnd = totalBodyCells - emptyCellsAtStart - daysInMonth;
+  const emptyCellsAtEnd = totalCells - emptyCellsAtStart - daysInMonth;
 
   // Normalize selected persons once for the entire month
   let personsArr;
@@ -842,7 +834,7 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
     tempGrid.appendChild(emptyDayWrapper);
   }
 
-  // Add calendar days with day-wrapper structure
+  // Add calendar days
   for (let d = 1; d <= daysInMonth; d++) {
     const dayWrapper = document.createElement('div');
     dayWrapper.className = 'export-day-wrapper';
@@ -882,8 +874,7 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
       }
 
       day.appendChild(person);
-    }
-    );
+    });
 
     dayWrapper.appendChild(day);
     tempGrid.appendChild(dayWrapper);
@@ -925,8 +916,7 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
 
   const blob = await new Promise((resolve) => {
     canvas.toBlob((b) => resolve(b), 'image/png', 1.0);
-  }
-  );
+  });
 
   // Clean up
   document.body.removeChild(tempContainer);

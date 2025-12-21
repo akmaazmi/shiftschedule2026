@@ -1,12 +1,12 @@
 :root {
   --primary: #4565fe;
-  --morning: #166534;
+  --morning: #0369a1;
   --evening: #b91c1c;
-  --night: lightslategray;
+  --night: #5F6F82;
   --off: antiquewhite;
   --rest: antiquewhite;
   --background-default: whitesmoke;
-  --border-default: 2px solid lightslategray;
+  --border-default: 2px solid #5F6F82;
   --border-active: 2px solid var(--primary);
 }
 
