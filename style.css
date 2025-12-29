@@ -6,8 +6,25 @@
   --off: antiquewhite;
   --rest: antiquewhite;
   --background-default: whitesmoke;
+
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+
+  --fs-xxs: 11px;
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-md: 16px;
+
+  --radius-xxs: 4px;
+  --radius-xs: 8px;
+  --radius-md: 16px;
+
   --border-default: 2px solid var(--night);
   --border-active: 2px solid var(--primary);
+
+  --icon-size: 24px;
 }
 
 * {
@@ -25,7 +42,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100dvh;
-  padding: 16px;
+  padding: var(--space-md);
 }
 
 .header {
@@ -34,10 +51,10 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 16px;
+  padding: var(--space-md);
   background: var(--background-default);
   border: var(--border-default);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
 }
 
 /* version label (small text at top of header) */
@@ -45,7 +62,7 @@ body {
   position: absolute;
   left: 50%;
   top: 3%;
-  font-size: 12px;
+  font-size: var(--fs-xs);
   font-weight: 600;
   color: #6b7280;
   transform: translate(-50%);
@@ -55,17 +72,17 @@ body {
 .filters {
   align-items: center;
   display: flex;
-  gap: 8px;
+  gap: var(--space-sm);
 }
 
 .filter-pill {
-  padding: 8px;
+  padding: var(--space-xs);
   font-family: inherit;
-  font-size: 13px;
+  font-size: var(--fs-sm);
   font-weight: 600;
   cursor: pointer;
   transition: all .15s ease;
-  border-radius: 8px;
+  border-radius: var(--radius-xs);
 }
 
 .filter-pill.active {
@@ -91,7 +108,7 @@ body {
   align-items: center;
   display: flex;
   left: 50%;
-  gap: 8px;
+  gap: var(--space-xs);
   transform: translate(-50%);
 }
 
@@ -99,17 +116,18 @@ body {
   align-items: center;
   display: flex;
   justify-content: center;
-  padding: 4px;
   background: var(--primary);
   border: var(--border-active);
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: var(--radius-xs);
+  padding-block: var(--space-xxs);
+  padding-inline: var(--space-xxs);
 }
 
 .icon-btn svg {
   display: block;
-  height: 24px;
-  width: 24px;
+  height: var(--icon-size);
+  width: var(--icon-size);
   fill: none;
   stroke: white;
   stroke-linecap: round;
@@ -118,11 +136,10 @@ body {
 }
 
 .month-label {
-  
   display: block;
   width: 130px;
   font-family: inherit;
-  font-size: 16px;
+  font-size: var(--fs-md);
   font-weight: 600;
   text-align: center;
   color: black;
@@ -134,27 +151,27 @@ body {
 }
 
 .download-btn {
-  padding: 8px;
+  padding: var(--space-xs);
   font-family: inherit;
-  font-size: 13px;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: white;
   background: var(--primary);
   border: var(--border-active);
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: var(--radius-xs);
 }
 
 .calendar {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin-top: 16px;
+  margin-top: var(--space-md);
   overflow: hidden;
-  padding: 16px;
+  padding: var(--space-md);
   background: var(--background-default);
   border: var(--border-default);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
 }
 
 .calendar-grid-container {
@@ -164,16 +181,16 @@ body {
 
 .calendar-grid {
   display: grid;
-  padding-right: 16px;
+  padding-right: var(--space-md);
   grid-template-columns: repeat(7, 1fr);
-  gap: 16px;
+  gap: var(--space-md);
 }
 
 .day-name {
   position: sticky;
   top: 0;
   z-index: 5;
-  font-size: 13px;
+  font-size: var(--fs-sm);
   font-weight: 600;
   text-align: center;
   color: black;
@@ -182,28 +199,28 @@ body {
 }
 
 .date {
-  font-size: 12px;
+  font-size: var(--fs-xs);
   font-weight: 600;
   text-align: center;
 }
 
 .day {
-  padding: 8px 8px 0 8px;
+  padding: var(--space-xs) var(--space-xs) 0 var(--space-xs);
   background: var(--background-default);
   border: var(--border-default);
-  border-radius: 8px;
+  border-radius: var(--radius-xs);
 }
 
 .person {
   align-items: center;
   display: flex;
-  padding-bottom: 8px;
-  gap: 8px;
+  padding-bottom: var(--space-xs);
+  gap: var(--space-xs);
 }
 
 .name-pill {
   color: black;
-  font-size: 12px;
+  font-size: var(--fs-xs);
   font-weight: 600;
 }
 
@@ -233,14 +250,14 @@ body {
 }
 
 .shift-pill {
-  padding: 0 4px;
-  font-size: 11px;
+  padding: 0 var(--space-xxs);
+  font-size: var(--fs-xxs);
   white-space: nowrap;
-  border-radius: 4px;
+  border-radius: var(--radius-xxs);
 }
 
 .work-cycle-label {
-  font-size: 11px;
+  font-size: var(--fs-xxs);
   color: black;
 }
 
@@ -279,7 +296,7 @@ body {
   max-width: 40vw;
   background: var(--background-default);
   animation: slideIn 0.3s;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
 }
 
 @keyframes slideIn {
@@ -298,24 +315,24 @@ body {
   align-items: center;
   display: flex;
   justify-content: flex-start;
-  padding: 16px;
+  padding: var(--space-md);
   border-bottom: var(--border-default);
 }
 
 .modal-header h2 {
   margin: 0;
-  font-size: 16px;
+  font-size: var(--fs-md);
   font-weight: 600;
   color: black;
 }
 
 .modal-body {
   flex: 1;
-  padding: 16px;
+  padding: var(--space-md);
 }
 
 .modal-section {
-  margin-bottom: 16px;
+  margin-bottom: var(--space-md);
 }
 
 .modal-section:last-child {
@@ -324,8 +341,8 @@ body {
 
 .modal-section h3 {
   margin: 0;
-  padding-bottom: 8px;
-  font-size: 13px;
+  padding-bottom: var(--space-xs);
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: black;
 }
@@ -333,17 +350,17 @@ body {
 .modal-filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--space-sm);
 }
 
 .modal-filter-pill {
-  padding: 8px;
+  padding: var(--space-xs);
   font-family: inherit;
-  font-size: 13px;
+  font-size: var(--fs-sm);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
-  border-radius: 8px;
+  border-radius: var(--radius-xs);
 }
 
 .modal-filter-pill:not(.active) {
@@ -368,19 +385,19 @@ body {
   align-items: center;
   display: flex;
   justify-content: flex-end;
-  padding: 16px;
+  padding: var(--space-md);
   border-top: var(--border-default);
-  gap: 8px;
+  gap: var(--space-sm);
 }
 
 .modal-btn {
-  padding: 8px;
+  padding: var(--space-xs);
   font-family: inherit;
-  font-size: 13px;
+  font-size: var(--fs-sm);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
-  border-radius: 8px;
+  border-radius: var(--radius-xs);
 }
 
 .modal-btn-cancel {
@@ -428,7 +445,7 @@ body {
 }
 
 .preview-instruction {
-  font-size: 12px;
+  font-size: var(--fs-xs);
   color: black;
 }
 
@@ -456,9 +473,9 @@ body {
 }
 
 .preview-label {
-  padding-bottom: 12px;
+  padding-bottom: var(--space-sm);
   width: 100%;
-  font-size: 12px;
+  font-size: var(--fs-xs);
   font-weight: 600;
   text-align: center;
   word-break: break-word;
@@ -467,12 +484,29 @@ body {
 
 @media (max-width: 768px) {
   :root {
-    --scale: 0.85;
+    --space-xxs: 2.6px;
+    --space-xs: 5.2px;
+    --space-sm: 7.8px;
+    --space-md: 10.4px;
+
+    --fs-xxs: 7.15px;
+    --fs-xs: 7.8px;
+    --fs-sm: 8.45px;
+    --fs-md: 10.4px;
+
+    --radius-xxs: 2.6px;
+    --radius-xs: 5.2px;
+    --radius-md: 10.4px;
+
+    --border-default: 1.3px solid var(--night);
+    --border-active: 1.3px solid var(--primary);
+
+    --icon-size: 15.6px;
   }
 
   .header {
     flex-direction: column;
-    gap: calc(12px * var(--scale));
+    gap: var(--space-sm);
   }
 
   .month-control {
@@ -480,37 +514,38 @@ body {
     transform: none;
   }
 
-  .filters {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .download {
-    width: 100%;
-    justify-content: center;
-  }
-
   .modal-content {
-    width: 90%;
-    max-width: 90%;
-    max-height: 85vh;
+    max-width: 90dvw;
+    max-height: 80dvh;
   }
 }
 
 /* Mobile devices (480px and below) */
 @media (max-width: 480px) {
   :root {
-    --scale: 0.7;
-  }
+    --space-xxs: 2.6px;
+    --space-xs: 5.2px;
+    --space-sm: 7.8px;
+    --space-md: 10.4px;
 
-  .container {
-    height: 100dvh;
+    --fs-xxs: 7.15px;
+    --fs-xs: 7.8px;
+    --fs-sm: 8.45px;
+    --fs-md: 10.4px;
+
+    --radius-xxs: 2.6px;
+    --radius-xs: 5.2px;
+    --radius-md: 10.4px;
+
+    --border-default: 1.3px solid var(--night);
+    --border-active: 1.3px solid var(--primary);
+
+    --icon-size: 15.6px;
   }
 
   .header {
     flex-direction: column;
-    gap: 10px;
+    gap: var(--space-sm);
   }
 
   .month-control {
@@ -518,31 +553,8 @@ body {
     transform: none;
   }
 
-  .filters {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .download {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .calendar {
-    padding-bottom: calc(24px * var(--scale) + env(safe-area-inset-bottom));
-  }
-
   .modal-content {
     max-width: 90dvw;
-    max-height: 90dvh;
-  }
-
-  .modal-footer {
-    flex-direction: column;
-  }
-
-  .modal-btn {
-    width: 100%;
+    max-height: 80dvh;
   }
 }

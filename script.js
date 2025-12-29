@@ -888,7 +888,7 @@ async function generateCalendarImage(monthIndex, selectedPersons, maxRows) {
 
   // Generate image
   const canvas = await html2canvas(tempContainer, {
-    scale: 2,
+    scale: 1.8,
     useCORS: true,
     backgroundColor: 'white',
     width: A4_WIDTH,
