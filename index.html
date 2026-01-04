@@ -13,32 +13,36 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="version">v1</div>
-      <div class="month-control">
-        <button id="prevMonth" class="icon-btn" type="button" aria-label="Previous month">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-svg">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </button>
-        <span id="monthLabel" class="month-label"></span>
-        <button id="nextMonth" class="icon-btn" type="button" aria-label="Next month">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-svg">
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        </button>
-      </div>
-      <div class="download">
-        <button id="downloadBtn" class="download-btn" type="button">Download Schedule as Image</button>
-      </div>
+  <div class="header">
+    <div class="version">v1</div>
+    <div class="month-control">
+      <button id="prevMonth" class="icon-btn" type="button" aria-label="Previous month">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-svg">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+      <span id="monthLabel" class="month-label"></span>
+      <button id="nextMonth" class="icon-btn" type="button" aria-label="Next month">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-svg">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
     </div>
+    <div class="download">
+      <button id="downloadBtn" class="download-btn" type="button">Download</button>
+    </div>
+  </div>
+
+  <!-- Filters akan ditambah oleh JavaScript di sini -->
+
+  <div class="container">
     <div class="calendar">
       <div class="calendar-grid-container">
         <div class="calendar-grid" id="calendarGrid"></div>
       </div>
     </div>
   </div>
+
   <div id="downloadModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">

@@ -103,9 +103,8 @@ function computeAssignment(person, date) {
   };
 }
 
-// create filter pills in header (left side)
+// create filter pills in separate section (below header)
 function createFilterPills() {
-  const header = document.querySelector('.header');
   const container = document.createElement('div');
   container.className = 'filters';
 
@@ -125,20 +124,17 @@ function createFilterPills() {
       allBtn.classList.remove('active');
       container.querySelectorAll('.filter-pill:not([data-name="ALL"])').forEach(btn => {
         btn.classList.remove('active');
-      }
-      );
+      });
     } else {
       // Select all
       teams.forEach(t => activeTeams.add(t));
       allBtn.classList.add('active');
       container.querySelectorAll('.filter-pill:not([data-name="ALL"])').forEach(btn => {
         btn.classList.add('active');
-      }
-      );
+      });
     }
     renderCalendar();
-  }
-  );
+  });
 
   container.appendChild(allBtn);
 
@@ -172,15 +168,14 @@ function createFilterPills() {
       }
 
       renderCalendar();
-    }
-    );
+    });
 
     container.appendChild(btn);
-  }
-  );
+  });
 
-  // insert filters at start of header
-  header.prepend(container);
+  // insert filters after header (at body level)
+  const headerEl = document.querySelector('.header');
+  headerEl.parentNode.insertBefore(container, headerEl.nextSibling);
 }
 
 function renderCalendar() {
