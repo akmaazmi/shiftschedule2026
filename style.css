@@ -493,7 +493,7 @@ body {
 /* Mobile devices (480px and below) */
 @media (max-width: 480px) {
   :root {
-    --scale: 0.6;
+    --scale: 0.65;
   }
 
   .modal-content {
