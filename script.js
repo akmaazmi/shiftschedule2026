@@ -31,7 +31,8 @@ const grid = document.getElementById('calendarGrid');
 const label = document.getElementById('monthLabel');
 
 // active filter set - start with ALL teams selected by default
-const activeTeams = new Set(teams);
+// keep filters deselected by default but calendar will show all when empty
+const activeTeams = new Set();
 
 // --- NEW: scheduling rules anchored at 1 Jan 2026 ---
 const START_DATE = new Date(2026, 0, 1);
@@ -108,40 +109,10 @@ function createFilterPills() {
   const container = document.createElement('div');
   container.className = 'filters';
 
-  // Add "All" button first
-  const allBtn = document.createElement('button');
-  allBtn.className = 'filter-pill active';
-  allBtn.type = 'button';
-  allBtn.dataset.name = 'ALL';
-  allBtn.textContent = 'All';
-
-  allBtn.addEventListener('click', () => {
-    const allActive = activeTeams.size === teams.length;
-
-    if (allActive) {
-      // Deselect all
-      activeTeams.clear();
-      allBtn.classList.remove('active');
-      container.querySelectorAll('.filter-pill:not([data-name="ALL"])').forEach(btn => {
-        btn.classList.remove('active');
-      });
-    } else {
-      // Select all
-      teams.forEach(t => activeTeams.add(t));
-      allBtn.classList.add('active');
-      container.querySelectorAll('.filter-pill:not([data-name="ALL"])').forEach(btn => {
-        btn.classList.add('active');
-      });
-    }
-    renderCalendar();
-  });
-
-  container.appendChild(allBtn);
-
   teams.forEach(t => {
     const btn = document.createElement('button');
-    // start WITH 'active' class so all buttons are active by default
-    btn.className = 'filter-pill active';
+    // start WITHOUT 'active' class (deselected by default)
+    btn.className = 'filter-pill';
     btn.type = 'button';
     btn.dataset.name = t;
 
@@ -157,14 +128,6 @@ function createFilterPills() {
       } else {
         activeTeams.add(name);
         btn.classList.add('active');
-      }
-
-      // Update "All" button state
-      const allBtn = container.querySelector('[data-name="ALL"]');
-      if (activeTeams.size === teams.length) {
-        allBtn.classList.add('active');
-      } else {
-        allBtn.classList.remove('active');
       }
 
       renderCalendar();
